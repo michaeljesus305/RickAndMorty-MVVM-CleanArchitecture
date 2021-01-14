@@ -1,0 +1,13 @@
+//
+//  ApiError.swift
+//  Domain
+//
+//  Created by Michael  on 13/01/21.
+//
+
+import Foundation
+
+enum ApiError: Error {
+    case parsing(description: String)
+    case network(description: String)
+}
