@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ResponseInfo: Codable {
+public struct ResponseInfo: Codable {
     let count, pages: Int
     let next: String
     let prev: String?

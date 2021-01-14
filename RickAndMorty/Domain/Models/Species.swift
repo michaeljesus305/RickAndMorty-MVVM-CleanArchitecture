@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Species: String, Codable {
+public enum Species: String, Codable {
     case alien = "Alien"
     case human = "Human"
     case humanoid = "Humanoid"

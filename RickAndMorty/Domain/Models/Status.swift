@@ -6,7 +6,7 @@
 //  Copyright © 2020 Michael . All rights reserved.
 //
 
-enum Status: String, Codable {
+public enum Status: String, Codable {
     case alive = "Alive"
     case dead = "Dead"
     case unknown = "unknown"
