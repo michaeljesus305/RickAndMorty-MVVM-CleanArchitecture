@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Response: Codable {
+public struct Response: Codable {
     let info: ResponseInfo
     let results: [Character]
 }

@@ -8,6 +8,6 @@
 import Foundation
 import Combine
 
-protocol FetchCharactersProtocol {
+public protocol FetchCharactersProtocol {
     func fetchCharacters(in page: Int) -> AnyPublisher<Response, ApiError>
 }
