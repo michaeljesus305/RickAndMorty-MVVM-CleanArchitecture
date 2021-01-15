@@ -9,15 +9,15 @@
 import Foundation
 
 public struct Character: Codable {
-    let id: Int
-    let name: String
-    let status: Status
-    let species: Species
-    let type: String
-    let gender: Gender
-    let origin, location: Location
-    let image: String
-    let episode: [String]
-    let url: String
-    let created: String
+    public let id: Int
+    public let name: String
+    public let status: Status
+    public let species: Species
+    public let type: String
+    public let gender: Gender
+    public let origin, location: Location
+    public let image: String
+    public let episode: [String]
+    public let url: String
+    public let created: String
 }
