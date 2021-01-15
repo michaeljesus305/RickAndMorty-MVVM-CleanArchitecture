@@ -13,13 +13,11 @@ final class CharacterService: FetchCharactersProtocol {
  
     // MARK: - Properties
 
-    private var session: URLSession
     private var httpGetClient: HttpGetClient
 
     // MARK: - Initializers
 
-    init(session: URLSession = .shared, httpGetClient: HttpGetClient) {
-        self.session = session
+    init(httpGetClient: HttpGetClient) {
         self.httpGetClient = httpGetClient
     }
 
