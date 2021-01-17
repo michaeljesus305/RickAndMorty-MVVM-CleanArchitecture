@@ -10,7 +10,7 @@ import Domain
 import Combine
 
 final class CharacterService: FetchCharactersProtocol {
- 
+
     // MARK: - Properties
 
     private var httpGetClient: HttpGetClient
@@ -25,10 +25,10 @@ final class CharacterService: FetchCharactersProtocol {
 
     func fetchCharacters(in page: Int) -> AnyPublisher<Response, ApiError> {
         let urlComponents = self.makeUrlComponents(with: String(page))
-        
+
         return self.httpGetClient.get(with: urlComponents).eraseToAnyPublisher()
     }
-    
+
     // MARK: - Private functions
 
     private func makeUrlComponents(with page: String) -> URLComponents {

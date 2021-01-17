@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Constants.Api {
-    public struct Character {
+    struct Character {
         public static let path = "/api/character"
     }
 }

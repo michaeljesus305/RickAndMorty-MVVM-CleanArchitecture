@@ -14,16 +14,15 @@ final class HttpGetSpy: HttpGetClient {
     var urlComponents: URLComponents?
     var getCallsCount = 0
     var fileName = String()
-    
-    func get<ApiResponse>(with urlComponents: URLComponents) -> AnyPublisher<ApiResponse, ApiError> where ApiResponse : Decodable, ApiResponse : Encodable {
+
+    func get<ApiResponse>(with urlComponents: URLComponents) -> AnyPublisher<ApiResponse, ApiError> where ApiResponse: Decodable, ApiResponse: Encodable {
         self.urlComponents = urlComponents
         self.getCallsCount += 1
-        
-        
+
         let bundle = Bundle(identifier: "Michael.Data")!
-        
+
         let data = getData(from: fileName, with: bundle)
-        
+
         return decode(data)
     }
 }
