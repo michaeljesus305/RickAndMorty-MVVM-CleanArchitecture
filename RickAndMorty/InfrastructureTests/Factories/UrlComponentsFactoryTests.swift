@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Data
 
 final class UrlComponentsFactoryTests {
     static func makeUrlComponents() -> URLComponents {
