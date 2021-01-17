@@ -8,11 +8,11 @@
 
 import Foundation
 
-enum Constants {
-    enum Api {
-        struct Global {
-            static let scheme = "https"
-            static let host = "rickandmortyapi.com"
+public enum Constants {
+    public enum Api {
+        public struct Global {
+            public static let scheme = "https"
+            public static let host = "rickandmortyapi.com"
         }
     }
 }

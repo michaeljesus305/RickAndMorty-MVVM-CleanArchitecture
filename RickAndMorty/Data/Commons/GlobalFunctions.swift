@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Domain
 
-func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, ApiError> {
+public func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, ApiError> {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .secondsSince1970
 
@@ -21,7 +21,7 @@ func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, ApiError> {
     .eraseToAnyPublisher()
 }
 
-func getData(from jsonFile: String, with bundle: Bundle = Bundle.main) -> Data {
+public func getData(from jsonFile: String, with bundle: Bundle = Bundle.main) -> Data {
     if let jsonUrl = bundle.url(forResource: jsonFile, withExtension: "json") {
         do {
             let data = try Data(contentsOf: jsonUrl)

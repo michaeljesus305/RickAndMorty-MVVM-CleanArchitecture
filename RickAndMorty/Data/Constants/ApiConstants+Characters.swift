@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension Constants.Api {
-    struct Character {
-        static let path = "/api/character"
+public extension Constants.Api {
+    public struct Character {
+        public static let path = "/api/character"
     }
 }
