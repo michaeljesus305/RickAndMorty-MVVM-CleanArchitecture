@@ -40,13 +40,10 @@ class CharacterServiceTests: XCTestCase {
         httpGetSpy.fileName = "characters"
         
         var characters = [Character]()
+        
         _ = sut.fetchCharacters(in: 1)
             .sink(receiveCompletion: { _ in
             }, receiveValue: { value in
-                if value.results.count < 1 {
-                    return
-                }
-                
                 characters.append(contentsOf: value.results)
                 
                 self.expectation.fulfill()

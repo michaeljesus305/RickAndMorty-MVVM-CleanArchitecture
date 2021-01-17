@@ -12,7 +12,6 @@ import Domain
 
 final class URLSessionAdapter {
     private var session: URLSession
-    var teste = ""
     
     init(session: URLSession = .shared) {
         self.session = session
@@ -39,13 +38,8 @@ final class URLSessionAdapter {
 
 class UrlSessionAdapterTest: XCTestCase {
 
-    func test_call_url_session_with_url_components() {
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [URLProtocolStub.self]
-        
-        let urlSession = URLSession(configuration: configuration)
-        
-        let sut = URLSessionAdapter(session: urlSession)
+    func test_call_request_with_url_components() {
+        let sut = self.makeSut()
         
         let urlComponents = UrlComponentsFactoryTests.makeUrlComponents()
         
@@ -66,6 +60,15 @@ class UrlSessionAdapterTest: XCTestCase {
         XCTAssertEqual(receivedRequest?.url, urlComponents.url)
         XCTAssertEqual(receivedRequest?.httpMethod, "GET")
         XCTAssertEqual(receivedRequest?.timeoutInterval, 15.0)
+    }
+    
+    private func makeSut() -> URLSessionAdapter {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [URLProtocolStub.self]
+        
+        let urlSession = URLSession(configuration: configuration)
+        
+        return URLSessionAdapter(session: urlSession)
     }
 }
 
