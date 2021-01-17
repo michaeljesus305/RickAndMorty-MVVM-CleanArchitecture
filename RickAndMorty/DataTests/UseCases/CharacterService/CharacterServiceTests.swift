@@ -15,16 +15,13 @@ class CharacterServiceTests: XCTestCase {
     
     private lazy var httpGetSpy = HttpGetSpy()
     
-    private lazy var sut: CharacterService = {
-        return CharacterService(httpGetClient: httpGetSpy)
-    }()
-    
     private var expectation = XCTestExpectation(description: "Wait Publisher Expectation")
     
     func test_call_get_http_client_with_url_components() {
+        let sut = self.makeSut()
         httpGetSpy.fileName = "characters"
         
-        _ = self.sut.fetchCharacters(in: 1)
+        _ = sut.fetchCharacters(in: 1)
         
         do {
             let urlComponents = try XCTUnwrap(httpGetSpy.urlComponents)
@@ -39,10 +36,11 @@ class CharacterServiceTests: XCTestCase {
     }
     
     func test_call_get_http_client_returns_success() {
+        let sut = self.makeSut()
         httpGetSpy.fileName = "characters"
         
         var characters = [Character]()
-        _ = self.sut.fetchCharacters(in: 1)
+        _ = sut.fetchCharacters(in: 1)
             .sink(receiveCompletion: { _ in
             }, receiveValue: { value in
                 if value.results.count < 1 {
@@ -70,11 +68,12 @@ class CharacterServiceTests: XCTestCase {
     }
     
     func test_call_get_http_client_with_error() {
+        let sut = self.makeSut()
         httpGetSpy.fileName = "error"
         
         var error: ApiError?
         
-        _ = self.sut.fetchCharacters(in: 1)
+        _ = sut.fetchCharacters(in: 1)
             .sink(receiveCompletion: { callbackError in
                 switch callbackError {
                 case .failure(let apiError):
@@ -90,6 +89,10 @@ class CharacterServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         
         XCTAssertNotNil(error)
+    }
+    
+    func makeSut() -> CharacterService {
+        CharacterService(httpGetClient: httpGetSpy)
     }
 }
 

@@ -238,6 +238,8 @@
 		4CC1C60025AFCFFE001B9E59 /* DataTests */ = {
 			isa = PBXGroup;
 			children = (
+				4CEF984125B3BBED008DF0EA /* Spies */,
+				4CEF983125B3BB73008DF0EA /* Factories */,
 				4CC1C66925AFEE45001B9E59 /* UseCases */,
 				4CC1C65925AFEC4A001B9E59 /* Mocks */,
 				4CC1C60325AFCFFE001B9E59 /* Info.plist */,
@@ -333,6 +335,20 @@
 				4CED6D1E25B130FA001A5883 /* Info.plist */,
 			);
 			path = PresentationTests;
+			sourceTree = "<group>";
+		};
+		4CEF983125B3BB73008DF0EA /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		4CEF984125B3BBED008DF0EA /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Spies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
