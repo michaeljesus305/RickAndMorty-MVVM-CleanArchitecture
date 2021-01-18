@@ -17,13 +17,13 @@ final class URLSessionAdapter {
         self.session = session
     }
 
-    func get<ApiResponse>(with urlComponents: URLComponents) -> AnyPublisher<ApiResponse, ApiError> where ApiResponse: Codable {
+    func get<ApiResponse>(with urlComponents: URLComponents, timeoutInterval: TimeInterval = 15.0) -> AnyPublisher<ApiResponse, ApiError> where ApiResponse: Codable {
         guard let url = urlComponents.url else {
             let error = ApiError.network(description: "Couldn't create URL")
             return Fail(error: error).eraseToAnyPublisher()
         }
 
-        let request = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData, timeoutInterval: 15.0)
+        let request = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData, timeoutInterval: timeoutInterval)
 
         return session.dataTaskPublisher(for: request)
             .mapError { error in
@@ -43,7 +43,7 @@ class UrlSessionAdapterTest: XCTestCase {
 
         let urlComponents = UrlComponentsFactoryTests.makeUrlComponents()
 
-        let result = sut.get(with: urlComponents).sink { _ in } receiveValue: { (_: Response) in }
+        let result = sut.get(with: urlComponents, timeoutInterval: 20.0).sink { _ in } receiveValue: { (_: Response) in }
 
         let expectation = XCTestExpectation(description: "Waiting for request")
 
@@ -59,7 +59,7 @@ class UrlSessionAdapterTest: XCTestCase {
         XCTAssertNotNil(result)
         XCTAssertEqual(receivedRequest?.url, urlComponents.url)
         XCTAssertEqual(receivedRequest?.httpMethod, "GET")
-        XCTAssertEqual(receivedRequest?.timeoutInterval, 15.0)
+        XCTAssertEqual(receivedRequest?.timeoutInterval, 20.0)
     }
 
     private func makeSut() -> URLSessionAdapter {
