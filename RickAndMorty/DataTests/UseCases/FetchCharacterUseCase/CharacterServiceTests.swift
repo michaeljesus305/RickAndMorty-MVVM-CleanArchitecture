@@ -11,7 +11,7 @@ import Domain
 
 @testable import Data
 
-class CharacterServiceTests: XCTestCase {
+class FetchCharacterUseCaseTests: XCTestCase {
 
     private lazy var httpGetSpy = HttpGetSpy()
 
@@ -88,7 +88,7 @@ class CharacterServiceTests: XCTestCase {
         XCTAssertNotNil(error)
     }
 
-    func makeSut() -> CharacterService {
-        CharacterService(httpGetClient: httpGetSpy)
+    func makeSut() -> FetchCharacterUseCase {
+        FetchCharacterUseCase(httpGetClient: httpGetSpy)
     }
 }

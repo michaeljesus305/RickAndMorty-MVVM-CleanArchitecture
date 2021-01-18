@@ -1,5 +1,5 @@
 //
-//  CharacterService.swift
+//  FetchCharacterUseCase.swift
 //  Data
 //
 //  Created by Michael  on 13/01/21.
@@ -9,7 +9,7 @@ import Foundation
 import Domain
 import Combine
 
-final class CharacterService: FetchCharactersProtocol {
+final class FetchCharacterUseCase: FetchCharactersProtocol {
 
     // MARK: - Properties
 
