@@ -36,12 +36,12 @@ final class URLSessionAdapter {
     }
 }
 
-class UrlSessionAdapterTest: XCTestCase {
+class URLSessionAdapterTest: XCTestCase {
 
     func test_call_request_with_url_components() {
         let sut = self.makeSut()
 
-        let urlComponents = UrlComponentsFactoryTests.makeUrlComponents()
+        let urlComponents = URLComponentsFactoryTests.makeUrlComponents()
 
         let result = sut.get(with: urlComponents, timeoutInterval: 20.0).sink { _ in } receiveValue: { (_: Response) in }
 

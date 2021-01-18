@@ -11,7 +11,7 @@
 		4C6EFD3725B3D04400AC8B24 /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC1C5F425AFCFFE001B9E59 /* Data.framework */; };
 		4C6EFD3825B3D04400AC8B24 /* Data.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC1C5F425AFCFFE001B9E59 /* Data.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C6EFD4D25B3D67F00AC8B24 /* URLSessionAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EFD4C25B3D67F00AC8B24 /* URLSessionAdapterTest.swift */; };
-		4C79067625B4E74900ABD0E0 /* UrlComponentsFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79067525B4E74900ABD0E0 /* UrlComponentsFactoryTests.swift */; };
+		4C79067625B4E74900ABD0E0 /* URLComponentsFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79067525B4E74900ABD0E0 /* URLComponentsFactoryTests.swift */; };
 		4C79068225B4ECD600ABD0E0 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79068125B4ECD600ABD0E0 /* URLProtocolStub.swift */; };
 		4CC1C5DB25AFCE42001B9E59 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1C5D125AFCE42001B9E59 /* Location.swift */; };
 		4CC1C5DC25AFCE42001B9E59 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1C5D225AFCE42001B9E59 /* Gender.swift */; };
@@ -128,7 +128,7 @@
 		4C6EFD2325B3D03100AC8B24 /* InfrastructureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfrastructureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6EFD2A25B3D03100AC8B24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C6EFD4C25B3D67F00AC8B24 /* URLSessionAdapterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAdapterTest.swift; sourceTree = "<group>"; };
-		4C79067525B4E74900ABD0E0 /* UrlComponentsFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlComponentsFactoryTests.swift; sourceTree = "<group>"; };
+		4C79067525B4E74900ABD0E0 /* URLComponentsFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsFactoryTests.swift; sourceTree = "<group>"; };
 		4C79068125B4ECD600ABD0E0 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		4CC1C5AE25AFCB87001B9E59 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC1C5B125AFCB87001B9E59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 		4C79067425B4E73900ABD0E0 /* Factories */ = {
 			isa = PBXGroup;
 			children = (
-				4C79067525B4E74900ABD0E0 /* UrlComponentsFactoryTests.swift */,
+				4C79067525B4E74900ABD0E0 /* URLComponentsFactoryTests.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -742,7 +742,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C79067625B4E74900ABD0E0 /* UrlComponentsFactoryTests.swift in Sources */,
+				4C79067625B4E74900ABD0E0 /* URLComponentsFactoryTests.swift in Sources */,
 				4C79068225B4ECD600ABD0E0 /* URLProtocolStub.swift in Sources */,
 				4C6EFD4D25B3D67F00AC8B24 /* URLSessionAdapterTest.swift in Sources */,
 			);
