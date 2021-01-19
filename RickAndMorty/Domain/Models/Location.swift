@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Location: Codable {
+public struct Location: Codable, Equatable {
     public let name: String
     public let url: String
 }
