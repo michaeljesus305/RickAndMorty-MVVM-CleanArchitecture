@@ -89,13 +89,13 @@ class FetchCharacterUseCaseTests: XCTestCase {
     func makeSut(file: StaticString = #filePath, line: UInt = #line) -> (sut: FetchCharacterUseCase, httpGetSpy: HttpGetSpy) {
         let httpGetSpy = HttpGetSpy()
         let sut = FetchCharacterUseCase(httpGetClient: httpGetSpy)
-       
+
         checkMemoryLeak(for: sut, file: file, line: line)
         checkMemoryLeak(for: httpGetSpy, file: file, line: line)
-        
+
         return (sut, httpGetSpy)
     }
-    
+
     func checkMemoryLeak(for object: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
         addTeardownBlock { [weak object] in
             XCTAssertNil(object, file: file, line: line)

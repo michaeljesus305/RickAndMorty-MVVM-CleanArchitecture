@@ -9,7 +9,7 @@ import Foundation
 
 final class ResponseFactory {
     static func make(statusCode: Int = 200) -> HTTPURLResponse? {
-        guard let url = URLComponentsFactoryTests.makeUrlComponents().url else {
+        guard let url = URLComponentsFactoryTests.make().url else {
             return nil
         }
 

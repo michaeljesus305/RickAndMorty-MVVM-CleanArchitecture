@@ -41,7 +41,7 @@ class URLSessionAdapterTest: XCTestCase {
     func test_call_request_with_url_components() {
         let sut = self.makeSut()
 
-        let urlComponents = URLComponentsFactoryTests.makeUrlComponents()
+        let urlComponents = URLComponentsFactoryTests.make()
 
         let result = sut.get(with: urlComponents, timeoutInterval: 20.0).sink { _ in } receiveValue: { (_: Response) in }
 
@@ -67,7 +67,7 @@ class URLSessionAdapterTest: XCTestCase {
         let bundle = Bundle(identifier: "Michael.Infrastructure")!
         let data = getData(from: "location", with: bundle)
         let response = ResponseFactory.make()
-        let urlComponents = URLComponentsFactoryTests.makeUrlComponents()
+        let urlComponents = URLComponentsFactoryTests.make()
         let expectation = XCTestExpectation(description: "Waiting for request")
         let expectedLocation = try? JSONDecoder().decode(Location.self, from: data)
 

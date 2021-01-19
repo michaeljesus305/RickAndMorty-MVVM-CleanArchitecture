@@ -9,7 +9,7 @@ import Foundation
 import Data
 
 final class URLComponentsFactoryTests {
-    static func makeUrlComponents() -> URLComponents {
+    static func make() -> URLComponents {
         let query = URLQueryItem(name: "page", value: "1")
 
         var components = URLComponents()
