@@ -1,5 +1,5 @@
 //
-//  UrlComponentsFactoryTests.swift
+//  URLComponentsFactoryTests.swift
 //  InfrastructureTests
 //
 //  Created by Michael  on 17/01/21.
@@ -8,8 +8,8 @@
 import Foundation
 import Data
 
-final class UrlComponentsFactoryTests {
-    static func makeUrlComponents() -> URLComponents {
+final class URLComponentsFactoryTests {
+    static func make() -> URLComponents {
         let query = URLQueryItem(name: "page", value: "1")
 
         var components = URLComponents()

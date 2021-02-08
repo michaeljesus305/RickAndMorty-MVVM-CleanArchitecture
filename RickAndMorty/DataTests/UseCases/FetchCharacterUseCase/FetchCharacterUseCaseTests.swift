@@ -1,5 +1,5 @@
 //
-//  CharacterServiceTests.swift
+//  FetchCharacterUseCaseTests.swift
 //  DataTests
 //
 //  Created by Michael  on 13/01/21.
@@ -11,14 +11,12 @@ import Domain
 
 @testable import Data
 
-class CharacterServiceTests: XCTestCase {
-
-    private lazy var httpGetSpy = HttpGetSpy()
+class FetchCharacterUseCaseTests: XCTestCase {
 
     private var expectation = XCTestExpectation(description: "Wait Publisher Expectation")
 
     func test_call_get_http_client_with_url_components() {
-        let sut = self.makeSut()
+        let (sut, httpGetSpy) = self.makeSut()
         httpGetSpy.fileName = "characters"
 
         _ = sut.fetchCharacters(in: 1)
@@ -36,17 +34,17 @@ class CharacterServiceTests: XCTestCase {
     }
 
     func test_call_get_http_client_returns_success() {
-        let sut = self.makeSut()
+        let (sut, httpGetSpy) = self.makeSut()
         httpGetSpy.fileName = "characters"
 
         var characters = [Character]()
 
         _ = sut.fetchCharacters(in: 1)
             .sink(receiveCompletion: { _ in
-            }, receiveValue: { value in
+            }, receiveValue: { [weak self] value in
                 characters.append(contentsOf: value.results)
 
-                self.expectation.fulfill()
+                self?.expectation.fulfill()
             })
 
         wait(for: [expectation], timeout: 1.0)
@@ -65,22 +63,22 @@ class CharacterServiceTests: XCTestCase {
     }
 
     func test_call_get_http_client_with_error() {
-        let sut = self.makeSut()
+        let (sut, httpGetSpy) = self.makeSut()
         httpGetSpy.fileName = "error"
 
         var error: ApiError?
 
         _ = sut.fetchCharacters(in: 1)
-            .sink(receiveCompletion: { callbackError in
+            .sink(receiveCompletion: { [weak self] callbackError in
                 switch callbackError {
                 case .failure(let apiError):
                     error = apiError
-                    self.expectation.fulfill()
+                    self?.expectation.fulfill()
                 case .finished:
                     XCTFail("call should result in fail")
                 }
-            }, receiveValue: { _ in
-                self.expectation.fulfill()
+            }, receiveValue: { [weak self] _ in
+                self?.expectation.fulfill()
             })
 
         wait(for: [expectation], timeout: 1.0)
@@ -88,7 +86,19 @@ class CharacterServiceTests: XCTestCase {
         XCTAssertNotNil(error)
     }
 
-    func makeSut() -> CharacterService {
-        CharacterService(httpGetClient: httpGetSpy)
+    func makeSut(file: StaticString = #filePath, line: UInt = #line) -> (sut: FetchCharacterUseCase, httpGetSpy: HttpGetSpy) {
+        let httpGetSpy = HttpGetSpy()
+        let sut = FetchCharacterUseCase(httpGetClient: httpGetSpy)
+
+        checkMemoryLeak(for: sut, file: file, line: line)
+        checkMemoryLeak(for: httpGetSpy, file: file, line: line)
+
+        return (sut, httpGetSpy)
+    }
+
+    func checkMemoryLeak(for object: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak object] in
+            XCTAssertNil(object, file: file, line: line)
+        }
     }
 }
