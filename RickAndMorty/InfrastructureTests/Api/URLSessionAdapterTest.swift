@@ -69,23 +69,27 @@ final class UrlSessionAdapterTest: XCTestCase {
         var receivedError: ApiError?
         let expectedError = ApiError.network(description: "Couldn't create URL")
 
-        let urlComponents = URLComponentsFactoryTests.makeUrlComponentsWithInvalidUrl()!
+        do {
+            let urlComponents = try XCTUnwrap(URLComponentsFactoryTests.makeUrlComponentsWithInvalidUrl())
 
-        let expectation = XCTestExpectation(description: "Waiting for request")
+            let expectation = XCTestExpectation(description: "Waiting for request")
 
-        _ = sut.get(with: urlComponents).sink(receiveCompletion: { (error) in
-            switch error {
-            case .failure(let error):
-                receivedError = error
-                expectation.fulfill()
-            default: XCTFail("Should result in failure")
-            }
-        }, receiveValue: { (_: Location) in })
+            _ = sut.get(with: urlComponents).sink(receiveCompletion: { (error) in
+                switch error {
+                case .failure(let error):
+                    receivedError = error
+                    expectation.fulfill()
+                default: XCTFail("Should result in failure")
+                }
+            }, receiveValue: { (_: Location) in })
 
-        wait(for: [expectation], timeout: 1.0)
+            wait(for: [expectation], timeout: 1.0)
 
-        XCTAssertNotNil(receivedError)
-        XCTAssertEqual(receivedError, expectedError)
+            XCTAssertNotNil(receivedError)
+            XCTAssertEqual(receivedError, expectedError)
+        } catch {
+            XCTFail("httpGetSpy.urlComponents can't be nil")
+        }
     }
 
     func test_call_with_network_error() {
