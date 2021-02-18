@@ -51,12 +51,11 @@ final class UrlSessionAdapterTest: XCTestCase {
         URLProtocolStub.response = response
         URLProtocolStub.data = data
 
-        let result = sut.get(with: urlComponents).sink(receiveCompletion: { completion in
-            print(completion)
-            expectation.fulfill()
+        let result = sut.get(with: urlComponents).sink(receiveCompletion: { _ in
+
         }, receiveValue: { (response: Location) in
             receivedLocation = response
-
+            expectation.fulfill()
         })
 
         wait(for: [expectation], timeout: 1.0)
@@ -87,6 +86,23 @@ final class UrlSessionAdapterTest: XCTestCase {
 
         XCTAssertNotNil(receivedError)
         XCTAssertEqual(receivedError, expectedError)
+    }
+
+    func test_call_with_network_error() {
+        let sut = self.makeSut()
+        let urlComponents = URLComponentsFactoryTests.makeValidUrlComponents()
+        let expectation = XCTestExpectation(description: "Waiting for request")
+
+        let result = sut.get(with: urlComponents).sink(receiveCompletion: { (error) in
+            print(String(describing: error))
+            expectation.fulfill()
+        }, receiveValue: { (_: Location) in
+
+        })
+
+        wait(for: [expectation], timeout: 1.0)
+
+        XCTAssertNotNil(result)
     }
 
     private func makeSut() -> URLSessionAdapter {
