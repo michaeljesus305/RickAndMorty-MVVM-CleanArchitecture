@@ -13,10 +13,10 @@ import Domain
 
 final class UrlSessionAdapterTest: XCTestCase {
 
-    func test_call_request_with_url_components() {
+    func test_call_request_with_valid_url_components() {
         let sut = self.makeSut()
 
-        let urlComponents = URLComponentsFactoryTests.make()
+        let urlComponents = URLComponentsFactoryTests.makeValidUrlComponents()
 
         let result = sut.get(with: urlComponents, timeoutInterval: 20.0).sink { _ in } receiveValue: { (_: Response) in }
 
@@ -42,7 +42,7 @@ final class UrlSessionAdapterTest: XCTestCase {
         let bundle = Bundle(identifier: "Michael.Infrastructure")!
         let data = getData(from: "location", with: bundle)
         let response = ResponseFactory.make()
-        let urlComponents = URLComponentsFactoryTests.make()
+        let urlComponents = URLComponentsFactoryTests.makeValidUrlComponents()
         let expectation = XCTestExpectation(description: "Waiting for request")
         let expectedLocation = try? JSONDecoder().decode(Location.self, from: data)
 
@@ -51,17 +51,42 @@ final class UrlSessionAdapterTest: XCTestCase {
         URLProtocolStub.response = response
         URLProtocolStub.data = data
 
-        let result = sut.get(with: urlComponents).sink(receiveCompletion: { _ in
-
+        let result = sut.get(with: urlComponents).sink(receiveCompletion: { completion in
+            print(completion)
+            expectation.fulfill()
         }, receiveValue: { (response: Location) in
             receivedLocation = response
-            expectation.fulfill()
+
         })
 
         wait(for: [expectation], timeout: 1.0)
 
         XCTAssertNotNil(result)
         XCTAssertEqual(receivedLocation, expectedLocation)
+    }
+
+    func test_call_request_with_invalid_url_components() {
+        let sut = self.makeSut()
+        var receivedError: ApiError?
+        let expectedError = ApiError.network(description: "Couldn't create URL")
+
+        let urlComponents = URLComponentsFactoryTests.makeUrlComponentsWithInvalidUrl()!
+
+        let expectation = XCTestExpectation(description: "Waiting for request")
+
+        _ = sut.get(with: urlComponents).sink(receiveCompletion: { (error) in
+            switch error {
+            case .failure(let error):
+                receivedError = error
+                expectation.fulfill()
+            default: XCTFail("Should result in failure")
+            }
+        }, receiveValue: { (_: Location) in })
+
+        wait(for: [expectation], timeout: 1.0)
+
+        XCTAssertNotNil(receivedError)
+        XCTAssertEqual(receivedError, expectedError)
     }
 
     private func makeSut() -> URLSessionAdapter {

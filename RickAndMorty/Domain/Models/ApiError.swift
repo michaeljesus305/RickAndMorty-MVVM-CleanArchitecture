@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ApiError: Error {
+public enum ApiError: Error, Equatable {
     case parsing(description: String)
     case network(description: String)
 }

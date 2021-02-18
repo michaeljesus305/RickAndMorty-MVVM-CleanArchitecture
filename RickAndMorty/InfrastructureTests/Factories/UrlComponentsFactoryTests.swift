@@ -9,7 +9,7 @@ import Foundation
 import Data
 
 final class URLComponentsFactoryTests {
-    static func make() -> URLComponents {
+    static func makeValidUrlComponents() -> URLComponents {
         let query = URLQueryItem(name: "page", value: "1")
 
         var components = URLComponents()
@@ -19,5 +19,12 @@ final class URLComponentsFactoryTests {
         components.queryItems = [query]
 
         return components
+    }
+
+    static func makeUrlComponentsWithInvalidUrl() -> URLComponents? {
+        var urlComponents = URLComponents(string: "https://google.com")
+        urlComponents?.path = "test/error"
+
+        return urlComponents
     }
 }
